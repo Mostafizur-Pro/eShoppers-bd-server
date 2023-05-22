@@ -7,7 +7,8 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 app.use(cors())
 app.use(express.json())
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.5xecsyp.mongodb.net/?retryWrites=true&w=majority`;
+// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.5xecsyp.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://eShoppers:0ZdaIElG5WvAo3qZ@cluster0.5xecsyp.mongodb.net/?retryWrites=true&w=majority`;
 
 
 const client = new MongoClient(uri, {
@@ -34,9 +35,8 @@ async function run() {
         //   Login User
         app.get("/users", async (req, res) => {
             const query = {};
-            const cursor = userCollection.find(query);
-            const services = await cursor.toArray();
-            res.send(services);
+            const users = await userCollection.find(query).toArray();
+            res.send(users);
           });
           app.post("/users", async (req, res) => {
             const user = req.body;
