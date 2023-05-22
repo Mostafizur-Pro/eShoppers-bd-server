@@ -57,6 +57,25 @@ async function run() {
       const result = await productCategory.insertOne(user);
       res.send(result);
     });
+    app.get("/productAll", async (req, res) => {
+      const query = {};
+      const services = await productCategory.find(query).toArray();
+      // const services = await cursor.toArray();
+      res.send(services);
+    });
+    app.get("/productAll/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const services = await productCategory.find(query).toArray();
+      // const services = await cursor.toArray();
+      res.send(services);
+    });
+    app.delete("/productAll/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await productCategory.deleteOne(query);
+      res.send(result);
+    });
   } finally {
   }
 }
