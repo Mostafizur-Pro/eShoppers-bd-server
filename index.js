@@ -32,7 +32,9 @@ async function run() {
       res.send(categories);
     });
 
-    //   Login User
+    //    User --------------------------------------------
+    //    User --------------------------------------------
+    //    User --------------------------------------------
     app.get("/users", async (req, res) => {
       const query = {};
       const users = await userCollection.find(query).toArray();
@@ -44,7 +46,16 @@ async function run() {
       res.send(result);
     });
 
-    // Product
+    app.delete("/users/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await userCollection.deleteOne(query);
+      res.send(result);
+    });
+
+    // Product --------------------------------------------
+    // Product --------------------------------------------
+    // Product --------------------------------------------
     app.get("/products", async (req, res) => {
       const category = req.query.category;
       const query = { category: category };
