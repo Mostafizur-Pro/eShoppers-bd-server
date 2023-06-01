@@ -58,6 +58,12 @@ async function run() {
       const result = await userCollection.deleteOne(query);
       res.send(result);
     });
+    app.get("/users/normal/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email };
+      const user = await userCollection.findOne(query);
+      res.send({ isUser: user?.userType === "normalUser" });
+    });
 
     app.get("/users/admin/:email", async (req, res) => {
       const email = req.params.email;
